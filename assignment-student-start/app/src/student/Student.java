@@ -19,6 +19,11 @@ public class Student {
         this.lastName = lName;
         this.stNumber = sNum;
     }
+
+    public String toString(){
+        String result = firstName + ", " + lastName + " s" + String.valueOf(stNumber);
+        return result;
+    }
     
     
 }

@@ -19,7 +19,17 @@ public class Group {
         System.out.println("this is the size " + all.length);
     }
     
-    public void addStudent (Student name, int place) {
-        
+    public void addStudent(Student name, int place) {
+        if(place < all.length) {
+            all[numStud] = name;
+            numStud++;
+            System.out.println("numStud; " + numStud);
+        }
+    }
+
+    public void printGroup(){
+        for(int i = 0; i < numStud; i++){
+            System.out.println(all[i].toString());
+        }
     }
 }

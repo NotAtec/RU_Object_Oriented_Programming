@@ -17,10 +17,19 @@ public class Main {
 
         for(int i = 0; i < size; i++) {
             System.out.println("Please enter a student");
-            String fname = scan.next();
-            String lname = scan.next();
+            int Snum = scan.nextInt();
+            String fName = scan.next();
+            String lName = scan.next();
             //System.out.println("I heard " + fname + " " + lname);
+            
+            //first make student with constructer
+            Student studentToAdd = new Student(fName, lName, Snum);
+            //add student to group
+            group.addStudent(studentToAdd, i);
         }
 
+        //print all students from the group
+        System.out.println("The group now contains:");
+        group.printGroup();
     }
 }
