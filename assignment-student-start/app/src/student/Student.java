@@ -20,10 +20,18 @@ public class Student {
         this.stNumber = sNum;
     }
 
-    public String toString(){
+    public void updateName(String fName, String lName) {
+        firstName = fName;
+        lastName = lName;
+    }
+
+    public String toString() {
         String result = firstName + ", " + lastName + " s" + String.valueOf(stNumber);
         return result;
     }
     
+    public int getSnum(){
+        return stNumber;
+    }
     
 }

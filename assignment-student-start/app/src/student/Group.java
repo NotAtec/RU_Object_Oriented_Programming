@@ -27,6 +27,23 @@ public class Group {
         }
     }
 
+    //this function returns the index of all where the student number 
+    public int findStudent(int Snum){
+        for(int i = 0; i < all.length; i++){
+            if(all[i].getSnum() == Snum){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void updateNameOfsNum(String fName, String lName, int sNum) {
+        int index = findStudent(sNum);
+        if(index >= 0){
+            all[index].updateName(fName, lName);
+        }
+    }
+
     public void printGroup(){
         for(int i = 0; i < numStud; i++){
             System.out.println(all[i].toString());
