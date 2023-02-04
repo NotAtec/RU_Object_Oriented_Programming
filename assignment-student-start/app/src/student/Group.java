@@ -16,18 +16,16 @@ public class Group {
     public Group(int amount) {
         all = new Student[amount];
         numStud = 0;
-        System.out.println("this is the size " + all.length);
     }
     
-    public void addStudent(Student name, int place) {
-        if(place < all.length) {
+    public void addStudent(Student name) {
+        if(numStud < all.length) {
             all[numStud] = name;
             numStud++;
-            System.out.println("numStud; " + numStud);
         }
     }
 
-    //this function returns the index of all where the student number 
+    //this function returns the index of the array of all students where the student number is the same as the given student number
     public int findStudent(int Snum){
         for(int i = 0; i < all.length; i++){
             if(all[i].getSnum() == Snum){
@@ -39,8 +37,8 @@ public class Group {
 
     public void updateNameOfsNum(String fName, String lName, int sNum) {
         int index = findStudent(sNum);
-        if(index >= 0){
-            all[index].updateName(fName, lName);
+        if(index >= 0){ //if index was -1, the student with sNum does not exist in the group
+            all[index].changeStudent(fName, lName, sNum);
         }
     }
 

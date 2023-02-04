@@ -20,13 +20,19 @@ public class Student {
         this.stNumber = sNum;
     }
 
-    public void updateName(String fName, String lName) {
+    private void updateName(String fName, String lName) {
         firstName = fName;
         lastName = lName;
     }
 
+    public void changeStudent(String fName, String lName, int Snum){
+        if(Snum == stNumber){
+            updateName(fName, lName);
+        }
+    }
+
     public String toString() {
-        String result = firstName + ", " + lastName + " s" + String.valueOf(stNumber);
+        String result = firstName + " " + lastName + ", s" + String.valueOf(stNumber);
         return result;
     }
     

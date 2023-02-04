@@ -23,7 +23,7 @@ public class Main {
             //first make student with constructer
             Student studentToAdd = new Student(fName, lName, sNum);
             //add student to group
-            group.addStudent(studentToAdd, i);
+            group.addStudent(studentToAdd);
         }
 
         //print all students from the group
