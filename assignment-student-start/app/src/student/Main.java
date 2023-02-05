@@ -33,8 +33,12 @@ public class Main {
         //keep asking if the user wants to change a name
         System.out.println("Student number and new given/family name? ");
         int sNum = scan.nextInt();
-        String fName = scan.next();
-        String lName = scan.next(); 
+        String fName = null;
+        String lName = null; 
+        if(sNum >= 0) {
+            fName = scan.next();
+            lName = scan.next(); 
+        }
 
         while(sNum >= 0){
             group.updateNameOfsNum(fName, lName, sNum); 
