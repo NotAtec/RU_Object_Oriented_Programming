@@ -31,13 +31,24 @@ public class GallowsUI {
         return in.nextLine();
     }
 
-    public Gallows getGame() {
-        return game;
-    }
-
     public void showStatus() {
         System.out.println("Incorrect guesses remaining: " + game.getRemaining() + "\n");
-        System.out.println("Guessed letters: " + Arrays.toString(game.getGuessed()) + "\n");
+        System.out.println("Guessed letters: " + Arrays.toString(game.getGuessed().toArray()) + "\n");
         System.out.println("Word: " + Arrays.toString(game.getMaskedWord()) + "\n");
+    }
+
+    public char getValidGuess() {
+        System.out.println("Input your guess, a letter from A to Z:\n");
+        String g = getUserInput().toLowerCase();
+        if(g.equals("")) return '.';
+        return g.charAt(0);
+    }
+
+    public void gameWon() {
+        System.out.println("\n Congrats, you won! You had " + game.getRemaining() + " wrong guesses left.\n");
+    }
+
+    public void gameLost() {
+        System.out.println("\n Unfortunately you lost... The word was " + game.getWord() + "\n");
     }
 }
