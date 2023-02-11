@@ -39,3 +39,7 @@ application {
     // Define the main class for the application.
     mainClass = 'hangman.Main'
 }
+
+run {
+    standardInput = System.in
+}
