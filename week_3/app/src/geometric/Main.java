@@ -2,6 +2,7 @@ package geometric;
 
 public class Main {
 	public static void main(String[] args) {
-		System.out.println("Hello world");
+		CommandUI ui = new CommandUI();
+		ui.inputLoop();
 	}
 }
