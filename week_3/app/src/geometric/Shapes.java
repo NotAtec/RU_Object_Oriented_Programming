@@ -1,4 +1,5 @@
 package geometric;
+import java.util.Arrays;
 
 public class Shapes {
     private Geometric[] shapes = new Geometric[CAPACITY];
@@ -34,5 +35,17 @@ public class Shapes {
 
     public Geometric find(int i) {
         return shapes[i];
+    }
+
+    public void sortShapesByArea() {
+        Arrays.sort(shapes, 0, itemCount, new AreaComparator());
+    }
+
+    public void sortShapesByLeftMostPoint() {
+        Arrays.sort(shapes, 0, itemCount, new XComparator());
+    }
+
+    public void sortShapesByBottomPoint() {
+        Arrays.sort(shapes, new YComparator());
     }
 }
