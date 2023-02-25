@@ -45,6 +45,6 @@ public class Rectangle implements Geometric {
     }
 
     public String toString() {
-        return "This rectangle has it's lower left corner at: (" + this.x + ", " + this.y + "). A width of: " + this.width + ", and a height of " + this.height + ".";
+        return "This rectangle has it's lower left corner at: (" + this.x + ", " + this.y + "). A width of: " + this.width + ", and a height of " + this.height + ".\n";
     }
 }

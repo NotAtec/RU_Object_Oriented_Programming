@@ -43,6 +43,6 @@ public class Circle implements Geometric {
     }
 
     public String toString() {
-        return "This circle has x coordinate: " + this.x + ", y coordinate: " + this.y + ", and radius " + this.r + ".";
+        return "This circle has x coordinate: " + this.x + ", y coordinate: " + this.y + ", and radius " + this.r + ".\n";
     }
 }

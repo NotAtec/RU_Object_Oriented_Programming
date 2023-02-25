@@ -28,5 +28,11 @@ public class Shapes {
         }
     }
 
+    public Geometric[] getShapes() {
+        return shapes;
+    }
 
+    public Geometric find(int i) {
+        return shapes[i];
+    }
 }
