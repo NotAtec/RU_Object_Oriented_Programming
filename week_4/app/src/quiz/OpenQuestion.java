@@ -12,7 +12,7 @@ public class OpenQuestion extends Question {
 
     @Override
     public String correctAnswer() {
-        return super.correctAnswer();
+        return "Q: " + super.correctAnswer();
     }
 
     @Override

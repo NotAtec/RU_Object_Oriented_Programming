@@ -12,7 +12,7 @@ public abstract class Question {
     }
 
     public String toString() {
-        return "Q: " + question + "\n";
+        return question + "\n";
     }
 
     public boolean isCorrect(String guess) {
