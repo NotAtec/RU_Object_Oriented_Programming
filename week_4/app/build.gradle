@@ -40,3 +40,7 @@ application {
     // Define the main class for the application.
     mainClass = 'quiz.Main'
 }
+
+run {
+    standardInput = System.in
+}

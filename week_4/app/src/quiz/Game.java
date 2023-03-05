@@ -49,7 +49,7 @@ public class Game {
         System.out.println("Points scored in round 1: " + scores[0] + "\n");
         System.out.println("Points scored in round 2: " + scores[1] + "\n");
     }
-    
+
     private static void showResult(boolean result, Question q) {
         if(result) {
             System.out.println("Correct!\n");
