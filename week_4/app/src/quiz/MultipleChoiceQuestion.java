@@ -19,7 +19,7 @@ public class MultipleChoiceQuestion extends Question {
     public String questionOnlyString() {
         return super.toString();
     }
-    
+
     @Override
     public String toString() {
         StringBuilder builtString = new StringBuilder();

@@ -27,7 +27,13 @@ public class Game {
     }
 
     public void playQuiz() {
-        int round = 0;
+        int r = 0;
+        playRound(r);
+        r++;
+        playRound(r);
+    }
+
+    private void playRound(int round) {
         for (Question q : questions) {
             boolean result = askQuestionGetResult(q);
 
@@ -44,7 +50,7 @@ public class Game {
             showResult(result, q);
         }
     }
-
+    
     public void showScores() {
         System.out.println("Points scored in round 1: " + scores[0] + "\n");
         System.out.println("Points scored in round 2: " + scores[1] + "\n");
