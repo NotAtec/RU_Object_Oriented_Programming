@@ -28,7 +28,7 @@ public class ThisThatQuestion extends MultipleChoiceQuestion {
 
     @Override
     public String toString() {
-        return a1 + " or " + a2 + ": " + super.toString();
+        return a1 + " or " + a2 + ": " + super.questionOnlyString();
     }
 
     @Override

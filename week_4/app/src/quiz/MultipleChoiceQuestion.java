@@ -16,6 +16,10 @@ public class MultipleChoiceQuestion extends Question {
         correctOption = correctAnswer;
     }
 
+    public String questionOnlyString() {
+        return super.toString();
+    }
+    
     @Override
     public String toString() {
         StringBuilder builtString = new StringBuilder();
