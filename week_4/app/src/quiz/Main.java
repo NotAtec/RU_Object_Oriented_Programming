@@ -1,9 +1,11 @@
 package quiz;
 
 public class Main {
-
 	public static void main(String[] args) {
-		System.out.println("Hello world!");
+		// Set up the game instance.
+		Game g = new Game();
+		g.initializeQuestions();
+		g.playQuiz();
+		g.showScores();
 	}
-
 }
