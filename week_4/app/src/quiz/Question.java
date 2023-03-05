@@ -5,28 +5,22 @@ public abstract class Question {
     private final String question;
     private final String answer;
 
-
-
-    public Question(String q, String ans) {
-        question = q;
-        answer = ans;
-        this.setScore(3);
-    }
-
     public Question(String q, String ans, int score) {
         question = q;
         answer = ans;
         this.setScore(score);
     }
 
-    public abstract String toString();
+    public String toString() {
+        return "Q: " + question + "\n";
+    }
 
-    public boolean isCorrect(String answer) {
-        return answer.equalsIgnoreCase(answer)
+    public boolean isCorrect(String guess) {
+        return answer.equalsIgnoreCase(guess);
     }
 
     public String correctAnswer() {
-        return "The answer is: " + answer;
+        return "The correct answer is: " + answer + "\n";
     }
     public int getScore() {
         return score;
