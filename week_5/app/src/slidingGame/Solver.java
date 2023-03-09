@@ -39,8 +39,8 @@ public class Solver {
 	}
 
 
-	private static boolean find(Collection<Configuration> enc, Configuration succ) {
-		for (Configuration encountered : enc) {
+	private static boolean find(Collection<Configuration> encountered, Configuration succ) {
+		for (Configuration enc : encountered) {
 			if (enc.equals(succ)) {
 				return true;
 			}
