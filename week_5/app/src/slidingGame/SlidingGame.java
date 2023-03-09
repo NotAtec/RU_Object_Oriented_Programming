@@ -73,8 +73,21 @@ public class SlidingGame implements Configuration {
 
 	@Override
 	public boolean isSolution() {
-		
-		throw new UnsupportedOperationException("isGoal : not supported yet.");
+		int count = 0;
+		//if the hole is not on the right botttom corner, the puzzle is not solved
+		if (board[N-1][N-1] != SIZE) {
+			return false;
+		}
+		for(int i = 0; i < (N - 1); i++) {
+			for(int j = 0; j < (N-1); j++) {
+				//board is solved iff the current value is 1 higher than the previous one
+				if (board[i][j] != (count + 1)) {
+					return false;
+				}
+				count ++;
+			}
+		}
+		return true;
 	}
 
 	@Override
