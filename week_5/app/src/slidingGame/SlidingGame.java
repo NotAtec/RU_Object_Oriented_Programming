@@ -18,6 +18,7 @@ public class SlidingGame implements Configuration {
 	private int[][] board;
 	private int holeX, holeY;
 	private int manhattanDist = 1337;
+	private SlidingGame parent = null;
 
 	/**
 	 * A constructor that initializes the board with the specified array
@@ -89,7 +90,7 @@ public class SlidingGame implements Configuration {
 
 	@Override
 	public Configuration getParent() {
-		throw new UnsupportedOperationException("parent: Not supported yet.");
+		return parent;
 	}
 
 }

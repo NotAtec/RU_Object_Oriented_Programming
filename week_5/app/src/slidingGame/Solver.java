@@ -1,6 +1,10 @@
 package slidingGame;
 
-import java.util.*;
+import java.util.Queue;
+import java.util.Collection;
+import java.util.List;
+import java.util.LinkedList;
+import java.lang.StringBuilder;
 
 /**
  * A class that implements a breadth-first search algorithm for finding the
@@ -25,7 +29,9 @@ public class Solver {
 		while (!toExamine.isEmpty()) {
 			Configuration next = toExamine.remove();
 			if (next.isSolution()) {
-				return next.toString();
+				List<Configuration> path = next.pathFromRoot();
+				String solution = makeString(path);
+				return solution;
 			} else {
 				for (Configuration succ : next.successors()) {
 					if (!find(encountered, succ)) {
@@ -46,5 +52,15 @@ public class Solver {
 			}
 		}
 		return false;
+	}
+
+	private static String makeString(List<Configuration> list) {
+		StringBuilder string = new StringBuilder();
+
+		for (Configuration node : list) {
+			string.append(node.toString());
+		}
+
+		return string.toString();
 	}
 }
