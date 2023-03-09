@@ -37,6 +37,4 @@ public interface Configuration extends Comparable<Configuration> {
 	public default List<Configuration> pathFromRoot() {
 		throw new UnsupportedOperationException("pathFromRoot: not supported yet.");
 	}
-
-	public
 }

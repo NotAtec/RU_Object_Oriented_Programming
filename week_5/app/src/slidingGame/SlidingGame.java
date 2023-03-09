@@ -64,11 +64,16 @@ public class SlidingGame implements Configuration {
 
 	@Override
 	public boolean equals(Object o) {
-		throw new UnsupportedOperationException("equals : not supported yet.");
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		} else {
+			return toString() == o.toString();
+		}
 	}
 
 	@Override
 	public boolean isSolution() {
+		
 		throw new UnsupportedOperationException("isGoal : not supported yet.");
 	}
 
