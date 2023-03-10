@@ -18,6 +18,7 @@ public class SlidingGame implements Configuration {
 	private int[][] board;
 	private int holeX, holeY;
 	private int manhattanDist = 1337;
+	private int[] start;
 
 	/**
 	 * A constructor that initializes the board with the specified array
@@ -37,6 +38,14 @@ public class SlidingGame implements Configuration {
 				holeY = p / N;
 			}
 		}
+		this.start = start;
+	}
+
+	public SlidingGame(int[][] board) {
+		
+		assert board.length == N : "Length of specified board incorrect";
+		
+		this.board = new int[N][N];
 	}
 
 	public int getManhattanDistance() {
@@ -90,9 +99,49 @@ public class SlidingGame implements Configuration {
 		return true;
 	}
 
+	/*
+	 * Checks if the row and column are in the array bounds
+	 * @param row: row
+	 * @param col: column
+	 * 
+	 * @return: the boolean associated with this
+	 */
+	private boolean validRowCol (int row, int col) {
+		return (row >= 0 && row < N && col >= 0 && col < N);
+	}
+
+	/*
+	 * Swaps the number on the board at the given row and col with the hole
+	 * @param row: the row of number that needs to be swapped
+	 * 		  col: the column of the number that needs to be swapped
+	 * 
+	 */
+	private void swapHole(int row, int col) {
+		board[holeY][holeX] = board[row][col];
+		board[row][col] = HOLE;
+		holeY = row;
+		holeX = col;
+
+	}
+
 	@Override
 	public Collection<Configuration> successors() {
-		throw new UnsupportedOperationException("successors : not supported yet.");
+		ArrayList<Configuration> configurations = new ArrayList<Configuration>();	//Creating arraylist  
+
+		//SlidingGame s = new SlidingGame(start);
+
+		for (Direction dir : Direction.values()) {
+			if (validRowCol(holeY + dir.getDY(), holeX + dir.getDX())) {
+				int holex = holeX;
+				int holey = holeY;
+				//swap the cells and add to the collection
+				swapHole(holeY + dir.getDY(), holeX + dir.getDX());
+				configurations.add(new SlidingGame(board));
+				//swap back
+				swapHole(holey, holex);
+			}	
+		}
+		return configurations;
 	}
 
 	@Override
