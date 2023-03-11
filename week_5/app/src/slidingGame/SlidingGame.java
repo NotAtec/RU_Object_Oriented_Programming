@@ -77,21 +77,25 @@ public class SlidingGame implements Configuration {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		} else {
-			return toString() == o.toString();
+			return this.toString() == o.toString();
 		}
 	}
 
 	@Override
 	public boolean isSolution() {
-		int count = 0;
+		int count = 1;
 		//if the hole is not on the right botttom corner, the puzzle is not solved
-		if (board[N-1][N-1] != SIZE) {
+		if (board[N-1][N-1] != HOLE) {
+			System.out.println("Het is deze false");
 			return false;
 		}
-		for(int i = 0; i < (N - 1); i++) {
-			for(int j = 0; j < (N-1); j++) {
+		for(int i = 0; i < N; i++) {
+			for(int j = 0; j < N; j++) {
 				//board is solved iff the current value is 1 higher than the previous one
-				if (board[i][j] != (count + 1)) {
+				if (board[j][i] != count) {
+					System.out.println(board[i][j]);
+					System.out.println(count);
+					System.out.println("Het is deze false dan");
 					return false;
 				}
 				count ++;
@@ -111,7 +115,9 @@ public class SlidingGame implements Configuration {
 
 				//swap the cells and add to the collection
 				swapHole(holeX + dir.getDX(), holeY + dir.getDY());
-				SlidingGame successor = new SlidingGame(board, manhattanDist);
+				int [][] board1 = new int [N][N];
+				
+				SlidingGame successor = new SlidingGame(board1, manhattanDist);
 				configurations.add(successor);
 				
 				//swap back
@@ -129,6 +135,18 @@ public class SlidingGame implements Configuration {
 	@Override
 	public Configuration getParent() {
 		return parent;
+	}
+
+	@Override
+	public int hashCode() {
+		int code = 0;
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				code += board[i][j] * Math.pow(31, (j + i * N));
+			}
+		}
+
+		return code;
 	}
 
 
@@ -151,14 +169,17 @@ public class SlidingGame implements Configuration {
 
 		assert x >=0 && x < N && y >=0 && y < N : "Length of specified board incorrect";
 
+		int manhattenDistance = 0;
 		int val = board[x][y];
 
 		//correct place
-		int toX = val % N;
-		int toY = val / N;
+		int toX = (val - 1) % N;
+		int toY = (val -1) / N;
 
 		//distance between correct place and the current place in manhatten style
-		int manhattenDistance = Math.abs((toX - x) + (toY - y));
+		if (val != HOLE) {
+			manhattenDistance = (Math.abs(toX - x) + Math.abs(toY - y));
+		}
 		return manhattenDistance;
 	}
 

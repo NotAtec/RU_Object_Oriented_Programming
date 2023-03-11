@@ -1,8 +1,14 @@
 package slidingGame;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 public class Main {
 	public static void main(String[] args) {
-		int[] oneStep = { 1, 2, 3, 4, 5, 6, 7, 9, 8 };
+		int[] oneStep = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 		int[] sevenSteps = { 4, 1, 3, 7, 2, 6, 5, 9, 8 };
 		int[] tenSteps = { 1, 6, 2, 5, 7, 3, 9, 4, 8 };
@@ -20,9 +26,15 @@ public class Main {
 			, 21, 22, 23, 24,  6
 			};
 
-		SlidingGame s = new SlidingGame(sevenSteps);
+		SlidingGame s = new SlidingGame(oneStep);
+		System.out.println("True? " + s.isSolution());
 		Solver solver = new Solver(s);
-		String solution = solver.solve();
-		System.out.println(solution);
+		ArrayList<Configuration> successors = new ArrayList<>();
+		for (Configuration succ : s.successors()) {
+			System.out.println(succ.toString());
+		}
+
+		//String solution = solver.solve();
+		//System.out.println(solution);
 	}
 }
