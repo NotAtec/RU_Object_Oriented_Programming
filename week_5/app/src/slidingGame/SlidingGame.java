@@ -190,16 +190,26 @@ public class SlidingGame implements Configuration {
 
 	/*
 	 * Swaps the number on the board at the given row and col with the hole
+	 * The manhattendistance is updated accordingly
+	 * 
 	 * @param row: the row of number that needs to be swapped
 	 * 		  col: the column of the number that needs to be swapped
 	 * 
 	 */
 	private void swapHole(int row, int col) {
+
+		//calculate manhattendistance without the two pieces to be swapped.
+		//this is needed for updating the manhattendistance after swapping
+		this.manhattanDist -= manhattenDistance(row, col) - manhattenDistance(holeY, holeX);
+
 		board[holeY][holeX] = board[row][col];
 		board[row][col] = HOLE;
+
+		//update manhattendistance
+		this.manhattanDist += manhattenDistance(row, col) + manhattenDistance(holeY, holeX);
+
 		holeY = row;
 		holeX = col;
-
 	}
 
 }
