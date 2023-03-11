@@ -41,12 +41,12 @@ public class SlidingGame implements Configuration {
 		manhattanDist = calculateManhattanDistance();
 	}
 
-	public SlidingGame(int[][] board) {
+	public SlidingGame(int[][] board, int manhattenDist) {
 		
 		assert board.length == N : "Length of specified board incorrect";
 		
-		this.board = new int[N][N];
-		manhattanDist = calculateManhattanDistance();
+		this.board = board;
+		this.manhattanDist = manhattenDist;
 	}
 
 	public int getManhattanDistance() {
@@ -104,17 +104,18 @@ public class SlidingGame implements Configuration {
 	public Collection<Configuration> successors() {
 		ArrayList<Configuration> configurations = new ArrayList<Configuration>();	//Creating arraylist  
 
-		//SlidingGame s = new SlidingGame(start);
-
 		for (Direction dir : Direction.values()) {
-			if (validRowCol(holeY + dir.getDY(), holeX + dir.getDX())) {
+			if (validRowCol(holeX + dir.getDX(), holeY + dir.getDY())) {
 				int holex = holeX;
 				int holey = holeY;
+
 				//swap the cells and add to the collection
-				swapHole(holeY + dir.getDY(), holeX + dir.getDX());
-				configurations.add(new SlidingGame(board));
+				swapHole(holeX + dir.getDX(), holeY + dir.getDY());
+				SlidingGame successor = new SlidingGame(board, manhattanDist);
+				configurations.add(successor);
+				
 				//swap back
-				swapHole(holey, holex);
+				swapHole(holex, holey);
 			}	
 		}
 		return configurations;
@@ -146,18 +147,18 @@ public class SlidingGame implements Configuration {
 	 * 
 	 * @return the manhattendistance of this piece on the board
 	 */
-	private int manhattenDistance(int row, int col) {
+	private int manhattenDistance(int x, int y) {
 
-		assert row >=0 && row < N && col >=0 && col < N : "Length of specified board incorrect";
+		assert x >=0 && x < N && y >=0 && y < N : "Length of specified board incorrect";
 
-		int val = board[row][col];
+		int val = board[x][y];
 
 		//correct place
-		int torow = val % N;
-		int tocol = val / N;
+		int toX = val % N;
+		int toY = val / N;
 
 		//distance between correct place and the current place in manhatten style
-		int manhattenDistance = Math.abs((torow - row) + (tocol - col));
+		int manhattenDistance = Math.abs((toX - x) + (toY - y));
 		return manhattenDistance;
 	}
 
@@ -185,8 +186,8 @@ public class SlidingGame implements Configuration {
 	 * 
 	 * @return: the boolean associated with this
 	 */
-	private boolean validRowCol (int row, int col) {
-		return (row >= 0 && row < N && col >= 0 && col < N);
+	private boolean validRowCol (int x, int y) {
+		return (x >= 0 && x < N && y >= 0 && y < N);
 	}
 
 	/*
@@ -197,22 +198,22 @@ public class SlidingGame implements Configuration {
 	 * 		  col: the column of the number that needs to be swapped
 	 * 
 	 */
-	private void swapHole(int row, int col) {
+	private void swapHole(int x, int y) {
 
-		parent = this;
+		parent = new SlidingGame(board, manhattanDist);
 
 		//calculate manhattendistance without the two pieces to be swapped.
 		//this is needed for updating the manhattendistance after swapping
-		manhattanDist -= manhattenDistance(row, col) - manhattenDistance(holeY, holeX);
+		manhattanDist -= manhattenDistance(x, y) - manhattenDistance(holeX, holeY);
 
-		board[holeY][holeX] = board[row][col];
-		board[row][col] = HOLE;
-
+		board[holeX][holeY] = board[x][y];
+		board[x][y] = HOLE;
+		
 		//update manhattendistance
-		manhattanDist += manhattenDistance(row, col) + manhattenDistance(holeY, holeX);
-
-		holeY = row;
-		holeX = col;
+		manhattanDist += manhattenDistance(x, y) + manhattenDistance(holeY, holeX);
+		
+		holeX = x;
+		holeY = y;
 	}
 
 }
