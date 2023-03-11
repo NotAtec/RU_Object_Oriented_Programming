@@ -18,7 +18,6 @@ public class SlidingGame implements Configuration {
 	private int[][] board;
 	private int holeX, holeY;
 	private int manhattanDist = 1337;
-	private int[] start;
 
 	/**
 	 * A constructor that initializes the board with the specified array
@@ -38,7 +37,7 @@ public class SlidingGame implements Configuration {
 				holeY = p / N;
 			}
 		}
-		this.start = start;
+		this.manhattanDist = calculateManhattanDistance();
 	}
 
 	public SlidingGame(int[][] board) {
@@ -46,6 +45,7 @@ public class SlidingGame implements Configuration {
 		assert board.length == N : "Length of specified board incorrect";
 		
 		this.board = new int[N][N];
+		this.manhattanDist = calculateManhattanDistance();
 	}
 
 	public int getManhattanDistance() {
@@ -99,6 +99,84 @@ public class SlidingGame implements Configuration {
 		return true;
 	}
 
+	@Override
+	public Collection<Configuration> successors() {
+		ArrayList<Configuration> configurations = new ArrayList<Configuration>();	//Creating arraylist  
+
+		//SlidingGame s = new SlidingGame(start);
+
+		for (Direction dir : Direction.values()) {
+			if (validRowCol(holeY + dir.getDY(), holeX + dir.getDX())) {
+				int holex = holeX;
+				int holey = holeY;
+				//swap the cells and add to the collection
+				swapHole(holeY + dir.getDY(), holeX + dir.getDX());
+				configurations.add(new SlidingGame(board));
+				//swap back
+				swapHole(holey, holex);
+			}	
+		}
+		return configurations;
+	}
+
+	@Override
+	public int compareTo(Configuration g) {
+		return this.manhattanDist - ((SlidingGame) g).manhattanDist;
+	}
+
+	@Override
+	public Configuration getParent() {
+		throw new UnsupportedOperationException("parent: Not supported yet.");
+	}
+
+
+	/*
+	 * PRIVATE HELPER FUNCTIONS
+	 */
+
+
+	/*
+	 * Calculates the manhattendistance of one piece on the board. 
+	 * That is, calculate the distance between the currenct place of the piece and the correct place of the piece in manhatten style
+	 * 
+	 * 
+	 * @param row: the row of the pice on the board
+	 * 		  col: the column of the piece on the board
+	 * 
+	 * @return the manhattendistance of this piece on the board
+	 */
+	private int manhattenDistance(int row, int col) {
+
+		assert row >=0 && row < N && col >=0 && col < N : "Length of specified board incorrect";
+
+		int val = board[row][col];
+
+		//correct place
+		int torow = val % N;
+		int tocol = val / N;
+
+		//distance between correct place and the current place in manhatten style
+		int manhattenDistance = Math.abs((torow - row) + (tocol - col));
+		return manhattenDistance;
+	}
+
+	/*
+	 * Calculates the total manhattendistance of the board. That is, the manhattendistance of every piece on the board
+	 * 
+	 */
+	private int calculateManhattanDistance() {
+
+		int totalManhattanDistence = 0;
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				totalManhattanDistence += manhattenDistance(i, j);
+			}
+		}
+
+		return totalManhattanDistence;
+	}
+
+	
 	/*
 	 * Checks if the row and column are in the array bounds
 	 * @param row: row
@@ -122,36 +200,6 @@ public class SlidingGame implements Configuration {
 		holeY = row;
 		holeX = col;
 
-	}
-
-	@Override
-	public Collection<Configuration> successors() {
-		ArrayList<Configuration> configurations = new ArrayList<Configuration>();	//Creating arraylist  
-
-		//SlidingGame s = new SlidingGame(start);
-
-		for (Direction dir : Direction.values()) {
-			if (validRowCol(holeY + dir.getDY(), holeX + dir.getDX())) {
-				int holex = holeX;
-				int holey = holeY;
-				//swap the cells and add to the collection
-				swapHole(holeY + dir.getDY(), holeX + dir.getDX());
-				configurations.add(new SlidingGame(board));
-				//swap back
-				swapHole(holey, holex);
-			}	
-		}
-		return configurations;
-	}
-
-	@Override
-	public int compareTo(Configuration g) {
-		throw new UnsupportedOperationException("compareTo : not supported yet.");
-	}
-
-	@Override
-	public Configuration getParent() {
-		throw new UnsupportedOperationException("parent: Not supported yet.");
 	}
 
 }
