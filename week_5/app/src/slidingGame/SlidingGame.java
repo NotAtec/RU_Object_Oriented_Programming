@@ -18,6 +18,7 @@ public class SlidingGame implements Configuration {
 	private int[][] board;
 	private int holeX, holeY;
 	private int manhattanDist = 1337;
+	private SlidingGame parent = null;
 
 	/**
 	 * A constructor that initializes the board with the specified array
@@ -37,7 +38,7 @@ public class SlidingGame implements Configuration {
 				holeY = p / N;
 			}
 		}
-		this.manhattanDist = calculateManhattanDistance();
+		manhattanDist = calculateManhattanDistance();
 	}
 
 	public SlidingGame(int[][] board) {
@@ -45,7 +46,7 @@ public class SlidingGame implements Configuration {
 		assert board.length == N : "Length of specified board incorrect";
 		
 		this.board = new int[N][N];
-		this.manhattanDist = calculateManhattanDistance();
+		manhattanDist = calculateManhattanDistance();
 	}
 
 	public int getManhattanDistance() {
@@ -121,12 +122,12 @@ public class SlidingGame implements Configuration {
 
 	@Override
 	public int compareTo(Configuration g) {
-		return this.manhattanDist - ((SlidingGame) g).manhattanDist;
+		return manhattanDist - ((SlidingGame) g).manhattanDist;
 	}
 
 	@Override
 	public Configuration getParent() {
-		throw new UnsupportedOperationException("parent: Not supported yet.");
+		return parent;
 	}
 
 
@@ -198,15 +199,17 @@ public class SlidingGame implements Configuration {
 	 */
 	private void swapHole(int row, int col) {
 
+		parent = this;
+
 		//calculate manhattendistance without the two pieces to be swapped.
 		//this is needed for updating the manhattendistance after swapping
-		this.manhattanDist -= manhattenDistance(row, col) - manhattenDistance(holeY, holeX);
+		manhattanDist -= manhattenDistance(row, col) - manhattenDistance(holeY, holeX);
 
 		board[holeY][holeX] = board[row][col];
 		board[row][col] = HOLE;
 
 		//update manhattendistance
-		this.manhattanDist += manhattenDistance(row, col) + manhattenDistance(holeY, holeX);
+		manhattanDist += manhattenDistance(row, col) + manhattenDistance(holeY, holeX);
 
 		holeY = row;
 		holeX = col;
