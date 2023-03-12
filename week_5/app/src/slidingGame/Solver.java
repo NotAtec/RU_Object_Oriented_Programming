@@ -15,7 +15,7 @@ public class Solver {
 	public Solver(Configuration g) {
 		toExamine = new PriorityQueue<>();
 		toExamine.add(g);
-		encountered = new HashSet<Configuration>();  
+		encountered = new ArrayList<Configuration>();  
 		//System.out.println(toExamine.peek().toString());
 		//throw new UnsupportedOperationException("Solver: not supported yet.");
 	}
@@ -28,12 +28,14 @@ public class Solver {
 	public String solve() {
 		while (!toExamine.isEmpty()) {
 			Configuration next = toExamine.remove();
-			//System.out.println(next.toString());
+			System.out.println("Next; \n" + next.toString());
 			if (next.isSolution()) {
 				return next.toString();
 			} else if (!encountered.contains(next)) {
 				encountered.add(next);
+				System.out.println("successors: ");
 				for (Configuration succ : next.successors()) {
+						System.out.println(succ.toString());
 						toExamine.add(succ);
 				}
 			}

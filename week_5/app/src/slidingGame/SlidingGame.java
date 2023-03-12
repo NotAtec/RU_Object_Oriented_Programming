@@ -53,6 +53,14 @@ public class SlidingGame implements Configuration {
 		return manhattanDist;
 	}
 
+	public int getholeX () {
+		return holeX;
+	}
+
+	public int getholeY () {
+		return holeY;
+	}
+
 	/**
 	 * Converts a board into a printable representation. The hole is displayed as a
 	 * space
@@ -77,7 +85,7 @@ public class SlidingGame implements Configuration {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		} else {
-			return this.toString() == o.toString();
+			return this.toString().equals(o.toString());
 		}
 	}
 
@@ -86,7 +94,6 @@ public class SlidingGame implements Configuration {
 		int count = 1;
 		//if the hole is not on the right botttom corner, the puzzle is not solved
 		if (board[N-1][N-1] != HOLE) {
-			System.out.println("Het is deze false");
 			return false;
 		}
 		for(int i = 0; i < N; i++) {
@@ -95,7 +102,6 @@ public class SlidingGame implements Configuration {
 				if (board[j][i] != count) {
 					System.out.println(board[i][j]);
 					System.out.println(count);
-					System.out.println("Het is deze false dan");
 					return false;
 				}
 				count ++;
@@ -115,12 +121,15 @@ public class SlidingGame implements Configuration {
 
 				//swap the cells and add to the collection
 				swapHole(holeX + dir.getDX(), holeY + dir.getDY());
+				//make board1 equal to the original changed board by value
 				int [][] board1 = new int [N][N];
-				
+				board1 = fillBord(board1, board);
 				SlidingGame successor = new SlidingGame(board1, manhattanDist);
+				System.out.println("holeX en holeY van successor: " + holeX + ", " + holeY);
+				System.out.println("Board of successor: \n" + successor.toString());
 				configurations.add(successor);
 				
-				//swap back
+				//swap the original board back
 				swapHole(holex, holey);
 			}	
 		}
@@ -231,10 +240,30 @@ public class SlidingGame implements Configuration {
 		board[x][y] = HOLE;
 		
 		//update manhattendistance
-		manhattanDist += manhattenDistance(x, y) + manhattenDistance(holeY, holeX);
+		manhattanDist += manhattenDistance(x, y) + manhattenDistance(holeX, holeY);
 		
 		holeX = x;
 		holeY = y;
+	}
+
+	/*
+	 * Copies the values of the array oldBoard to the array newBoard. So newBoard will be equal to oldBoard by value (not by reference)
+	 * 
+	 * @param newBoard: the board that gets new values
+	 * 		  oldBoard: the board that gives new values
+	 * 
+	 * @result newBoard with the new values
+	 */
+	private int[][] fillBord(int [][] newBoard, int [][] oldBoard) {
+		
+		assert newBoard.length == N & oldBoard.length == N : "Length of specified board incorrect";
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				newBoard[i][j] = oldBoard[i][j];
+			}
+		}
+		return newBoard;
 	}
 
 }

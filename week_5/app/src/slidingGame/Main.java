@@ -8,10 +8,11 @@ import java.util.List;
 
 public class Main {
 	public static void main(String[] args) {
-		int[] oneStep = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		int[] oneStep = { 1, 2, 3, 4, 5, 6, 7, 9, 8 };
 
 		int[] sevenSteps = { 4, 1, 3, 7, 2, 6, 5, 9, 8 };
 		int[] tenSteps = { 1, 6, 2, 5, 7, 3, 9, 4, 8 };
+		int[] test = { 4, 1, 3, 7, 2, 6, 9, 5, 8};
 
 		int[] unsolvable1 = { 1, 4, 7, 2, 5, 9, 3, 6, 8 };
 		int[] unsolvable2 = { 1, 3, 2, 4, 9, 5, 6, 7, 8 };
@@ -26,12 +27,15 @@ public class Main {
 			, 21, 22, 23, 24,  6
 			};
 
-		SlidingGame s = new SlidingGame(oneStep);
-		System.out.println("True? " + s.isSolution());
-		Solver solver = new Solver(s);
-		ArrayList<Configuration> successors = new ArrayList<>();
+		SlidingGame s = new SlidingGame(test);
+		System.out.println("Original board \n" + s.toString());
+		//System.out.println("True? " + s.isSolution());
+		//Solver solver = new Solver(s);
 		for (Configuration succ : s.successors()) {
 			System.out.println(succ.toString());
+			for (Configuration succ2 : succ.successors()) {
+				System.out.println("tweede opvolger: \n" + succ2.toString());
+			}
 		}
 
 		//String solution = solver.solve();
