@@ -62,6 +62,7 @@ public class Solver {
 
 		for (Configuration node : list) {
 			string.append(node.toString());
+			string.append("\n");
 		}
 
 		return string.toString();

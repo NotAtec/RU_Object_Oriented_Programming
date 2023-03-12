@@ -125,6 +125,7 @@ public class SlidingGame implements Configuration {
 				int [][] board1 = new int [N][N];
 				board1 = fillBord(board1, board);
 				SlidingGame successor = new SlidingGame(board1, manhattanDist, holeX, holeY);
+				successor.setParent(this);
 				configurations.add(successor);
 				
 				//swap the original board back
@@ -266,4 +267,7 @@ public class SlidingGame implements Configuration {
 		return newBoard;
 	}
 
+	private void setParent(SlidingGame p) {
+		parent = p;
+	}
 }
