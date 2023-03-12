@@ -1,11 +1,18 @@
 package slidingGame;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 public class Main {
 	public static void main(String[] args) {
 		int[] oneStep = { 1, 2, 3, 4, 5, 6, 7, 9, 8 };
 
 		int[] sevenSteps = { 4, 1, 3, 7, 2, 6, 5, 9, 8 };
 		int[] tenSteps = { 1, 6, 2, 5, 7, 3, 9, 4, 8 };
+		int[] test = { 4, 1, 3, 7, 2, 6, 9, 5, 8};
 
 		int[] unsolvable1 = { 1, 4, 7, 2, 5, 9, 3, 6, 8 };
 		int[] unsolvable2 = { 1, 3, 2, 4, 9, 5, 6, 7, 8 };
@@ -20,8 +27,9 @@ public class Main {
 			, 21, 22, 23, 24,  6
 			};
 
-		SlidingGame s = new SlidingGame(sevenSteps);
+		SlidingGame s = new SlidingGame(tenSteps);
 		Solver solver = new Solver(s);
+
 		String solution = solver.solve();
 		System.out.println(solution);
 	}

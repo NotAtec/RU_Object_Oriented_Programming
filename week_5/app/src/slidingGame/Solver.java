@@ -17,7 +17,9 @@ public class Solver {
 	private Collection<Configuration> encountered;
 
 	public Solver(Configuration g) {
-		throw new UnsupportedOperationException("Solver: not supported yet.");
+		toExamine = new PriorityQueue<>();
+		toExamine.add(g);
+		encountered = new ArrayList<Configuration>();  
 	}
 
 	/**
