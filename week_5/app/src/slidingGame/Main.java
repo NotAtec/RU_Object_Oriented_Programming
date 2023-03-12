@@ -1,11 +1,5 @@
 package slidingGame;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 public class Main {
 	public static void main(String[] args) {
 		int[] oneStep = { 1, 2, 3, 4, 5, 6, 7, 9, 8 };

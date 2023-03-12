@@ -2,8 +2,6 @@ package slidingGame;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * A template of a sliding game
