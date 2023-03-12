@@ -27,18 +27,10 @@ public class Main {
 			, 21, 22, 23, 24,  6
 			};
 
-		SlidingGame s = new SlidingGame(test);
-		System.out.println("Original board \n" + s.toString());
-		//System.out.println("True? " + s.isSolution());
-		//Solver solver = new Solver(s);
-		for (Configuration succ : s.successors()) {
-			System.out.println(succ.toString());
-			for (Configuration succ2 : succ.successors()) {
-				System.out.println("tweede opvolger: \n" + succ2.toString());
-			}
-		}
+		SlidingGame s = new SlidingGame(tenSteps);
+		Solver solver = new Solver(s);
 
-		//String solution = solver.solve();
-		//System.out.println(solution);
+		String solution = solver.solve();
+		System.out.println(solution);
 	}
 }

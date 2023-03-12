@@ -41,12 +41,14 @@ public class SlidingGame implements Configuration {
 		manhattanDist = calculateManhattanDistance();
 	}
 
-	public SlidingGame(int[][] board, int manhattenDist) {
+	public SlidingGame(int[][] board, int manhattenDist, int holeX, int holeY) {
 		
 		assert board.length == N : "Length of specified board incorrect";
 		
 		this.board = board;
 		this.manhattanDist = manhattenDist;
+		this.holeX = holeX;
+		this.holeY = holeY;
 	}
 
 	public int getManhattanDistance() {
@@ -100,8 +102,6 @@ public class SlidingGame implements Configuration {
 			for(int j = 0; j < N; j++) {
 				//board is solved iff the current value is 1 higher than the previous one
 				if (board[j][i] != count) {
-					System.out.println(board[i][j]);
-					System.out.println(count);
 					return false;
 				}
 				count ++;
@@ -124,9 +124,7 @@ public class SlidingGame implements Configuration {
 				//make board1 equal to the original changed board by value
 				int [][] board1 = new int [N][N];
 				board1 = fillBord(board1, board);
-				SlidingGame successor = new SlidingGame(board1, manhattanDist);
-				System.out.println("holeX en holeY van successor: " + holeX + ", " + holeY);
-				System.out.println("Board of successor: \n" + successor.toString());
+				SlidingGame successor = new SlidingGame(board1, manhattanDist, holeX, holeY);
 				configurations.add(successor);
 				
 				//swap the original board back
@@ -230,7 +228,9 @@ public class SlidingGame implements Configuration {
 	 */
 	private void swapHole(int x, int y) {
 
-		parent = new SlidingGame(board, manhattanDist);
+		int [][] board1 = new int [N][N];
+		board1 = fillBord(board1, board);
+		parent = new SlidingGame(board1, manhattanDist, holeX, holeY);
 
 		//calculate manhattendistance without the two pieces to be swapped.
 		//this is needed for updating the manhattendistance after swapping
