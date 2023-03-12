@@ -3,7 +3,6 @@ package slidingGame;
 import java.util.Queue;
 import java.util.Collection;
 import java.util.List;
-import java.util.LinkedList;
 import java.lang.StringBuilder;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -18,7 +17,7 @@ public class Solver {
 	private Collection<Configuration> encountered;
 
 	public Solver(Configuration g) {
-		toExamine = new PriorityQueue<>();
+		toExamine = new PriorityQueue<Configuration>();
 		toExamine.add(g);
 		encountered = new ArrayList<Configuration>();  
 	}
@@ -37,7 +36,7 @@ public class Solver {
 				return solution;
 			} else {
 				for (Configuration succ : next.successors()) {
-					if (!find(encountered, succ)) {
+					if (!encountered.contains(succ)) {
 						toExamine.add(succ);
 						encountered.add(succ);
 					}
@@ -45,16 +44,6 @@ public class Solver {
 			}
 		}
 		return "Failure!";
-	}
-
-
-	private static boolean find(Collection<Configuration> encountered, Configuration succ) {
-		for (Configuration enc : encountered) {
-			if (enc.equals(succ)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private static String makeString(List<Configuration> list) {
