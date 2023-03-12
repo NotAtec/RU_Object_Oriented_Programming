@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class SlidingGame implements Configuration {
 
-	public static final int N = 5, SIZE = N * N, HOLE = SIZE;
+	public static final int N = 3, SIZE = N * N, HOLE = SIZE;
 	/**
 	 * The board is represented by a 2-dimensional array; the position of the hole
 	 * is kept in 2 variables holeX and holeY

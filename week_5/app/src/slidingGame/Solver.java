@@ -2,9 +2,9 @@ package slidingGame;
 
 import java.util.Queue;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.lang.StringBuilder;
-import java.util.ArrayList;
 import java.util.PriorityQueue;
 /**
  * A class that implements a breadth-first search algorithm for finding the
@@ -19,7 +19,7 @@ public class Solver {
 	public Solver(Configuration g) {
 		toExamine = new PriorityQueue<Configuration>();
 		toExamine.add(g);
-		encountered = new ArrayList<Configuration>();  
+		encountered = new HashSet<Configuration>();  
 	}
 
 	/**

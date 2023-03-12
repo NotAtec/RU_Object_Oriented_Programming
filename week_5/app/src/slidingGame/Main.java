@@ -27,7 +27,7 @@ public class Main {
 			, 21, 22, 23, 24,  6
 			};
 
-		SlidingGame s = new SlidingGame(tenSteps);
+		SlidingGame s = new SlidingGame(oneStep);
 		Solver solver = new Solver(s);
 
 		String solution = solver.solve();
