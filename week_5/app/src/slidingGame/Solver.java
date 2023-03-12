@@ -5,7 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.LinkedList;
 import java.lang.StringBuilder;
-
+import java.util.ArrayList;
+import java.util.PriorityQueue;
 /**
  * A class that implements a breadth-first search algorithm for finding the
  * Configurations for which the isSolution predicate holds
