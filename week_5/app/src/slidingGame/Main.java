@@ -1,11 +1,5 @@
 package slidingGame;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 public class Main {
 	public static void main(String[] args) {
 		int[] oneStep = { 1, 2, 3, 4, 5, 6, 7, 9, 8 };
@@ -27,7 +21,7 @@ public class Main {
 			, 21, 22, 23, 24,  6
 			};
 
-		SlidingGame s = new SlidingGame(tenSteps);
+		SlidingGame s = new SlidingGame(oneStep);
 		Solver solver = new Solver(s);
 
 		String solution = solver.solve();

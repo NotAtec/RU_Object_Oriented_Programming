@@ -1,7 +1,6 @@
 package slidingGame;
 
 import java.util.*;
-
 /**
  * A class that implements a breadth-first search algorithm for finding the
  * Configurations for which the isSolution predicate holds
@@ -13,9 +12,10 @@ public class Solver {
 	private Collection<Configuration> encountered;
 
 	public Solver(Configuration g) {
-		toExamine = new PriorityQueue<>();
+
+		toExamine = new PriorityQueue<Configuration>();
 		toExamine.add(g);
-		encountered = new ArrayList<Configuration>();  
+		encountered = new HashSet<Configuration>();  
 	}
 
 	/**
@@ -27,15 +27,30 @@ public class Solver {
 		while (!toExamine.isEmpty()) {
 			Configuration next = toExamine.remove();
 			if (next.isSolution()) {
-				return next.toString();
-			} else if (!encountered.contains(next)) {
-				encountered.add(next);
+				List<Configuration> path = next.pathFromRoot();
+				String solution = makeString(path);
+				return solution;
+			} else {
 				for (Configuration succ : next.successors()) {
+					if (!encountered.contains(succ)) {
 						toExamine.add(succ);
+						encountered.add(succ);
+					}
 				}
 			}
 		}
 		return "Failure!";
-	}
+}
 
+
+	private static String makeString(List<Configuration> list) {
+		StringBuilder string = new StringBuilder();
+
+		for (Configuration node : list) {
+			string.append(node.toString());
+			string.append("\n");
+		}
+
+		return string.toString();
+	}
 }
