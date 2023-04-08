@@ -4,8 +4,8 @@ package slidingGame;
  */
 
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.LinkedList;
 
 public interface Configuration extends Comparable<Configuration> {
 	/**
@@ -25,7 +25,7 @@ public interface Configuration extends Comparable<Configuration> {
 
 	/**
 	 * For marking final / solution configurations.
-	 *
+
 	 * @return true if a this is a solution, false otherwise
 	 */
 	public abstract boolean isSolution();
@@ -36,6 +36,9 @@ public interface Configuration extends Comparable<Configuration> {
 	 * @return a list of successive configurations from the root to 'this'
 	 */
 	public default List<Configuration> pathFromRoot() {
+
+		throw new UnsupportedOperationException("pathFromRoot: not supported yet.");
+
 		List<Configuration> path = new LinkedList<Configuration>();
 		path.add(this);
 		Configuration step = this;

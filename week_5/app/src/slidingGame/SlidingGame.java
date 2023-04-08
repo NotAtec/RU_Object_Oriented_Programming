@@ -231,6 +231,7 @@ public class SlidingGame implements Configuration {
 
 		int [][] board1 = new int [N][N];
 		board1 = fillBord(board1, board);
+		parent = new SlidingGame(board1, manhattanDist, holeX, holeY);
 
 		//calculate manhattendistance without the two pieces to be swapped.
 		//this is needed for updating the manhattendistance after swapping
