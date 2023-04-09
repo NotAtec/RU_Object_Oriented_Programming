@@ -1,5 +1,7 @@
 package expressions;
 
+import java.util.Map;
+
 public class Constant extends NoArgExpr{
     
     private double constant;
@@ -10,12 +12,12 @@ public class Constant extends NoArgExpr{
 
     @Override
     public String toString() {
-        return "" + getConstant();
+        return "" + getConstantValue();
     }
 
     @Override
     public double eval(Map<String, Double> env) {
-        return getConstant();
+        return getConstantValue();
     }
 
     @Override
@@ -35,7 +37,7 @@ public class Constant extends NoArgExpr{
         if (cons == null || getClass() != cons.getClass()) {
             return false;
         } else {
-            return this.constant == cons.getConstantValue;
+            return this.constant == ((Constant) cons).getConstantValue();
         }
     }
 }

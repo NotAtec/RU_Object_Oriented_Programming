@@ -1,10 +1,12 @@
 package expressions;
 
+import java.util.Map;
+
 public class Negate extends OneArgExpr{
 
     private Expression expr;
 
-    public Expression (Expression expr) {
+    public Negate (Expression expr) {
         this.expr = expr;
     }
 
@@ -14,13 +16,11 @@ public class Negate extends OneArgExpr{
     }
 
 	public double eval(Map<String, Double> env) {
-        double result = expr.eval;
+        double result = expr.eval(env);
         return -result;
     }
 	
     public Expression partialEval() {
-        //return -1 * expr
-        //construct product expresion
-        return null;
+        return new Negate(expr);
     }
 }

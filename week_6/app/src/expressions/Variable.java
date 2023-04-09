@@ -1,4 +1,7 @@
-import expressions.NoArgExpr;
+package expressions;
+
+import java.util.Map;
+
 
 public class Variable extends NoArgExpr{
     
@@ -24,7 +27,7 @@ public class Variable extends NoArgExpr{
 
     @Override
 	public Expression partialEval() {
-        return new Variable(name);
+        return new Variable(this.name);
     }
 
     @Override
@@ -32,7 +35,7 @@ public class Variable extends NoArgExpr{
         if (var == null || getClass() != var.getClass()) {
             return false;
         } else {
-            return this.name.equals(var.getName());
+            return this.name.equals(((Variable) var).getName());
         }
     }
 }

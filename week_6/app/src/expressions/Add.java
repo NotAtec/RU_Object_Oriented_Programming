@@ -1,11 +1,13 @@
 package expressions;
 
+import java.util.Map;
+
 public class Add extends TwoArgExpr{
     
     Expression left;
     Expression right;
 
-    public Add(Expression left, Expresion right) {
+    public Add(Expression left, Expression right) {
         this.left = left;
         this.right = right;
     }
@@ -17,7 +19,7 @@ public class Add extends TwoArgExpr{
 
     @Override
     public double eval(Map<String, Double> env) {
-        return left.eval + right.eval;
+        return left.eval(env) + right.eval(env);
     }
 
     @Override
@@ -32,12 +34,12 @@ public class Add extends TwoArgExpr{
                 return rightPartial;
             }
             return rightPartial;
-        } else if (rightpartial.equals(zero)) {
+        } else if (rightPartial.equals(zero)) {
             if (leftPartial.equals(zero)) {
                 return new Constant(0);
             }
             return leftPartial;
-        } else if (leftpartial.getConstantValue != null && rightPartial.getConstantValue() != null) {
+        } else if (leftPartial.getConstantValue() != null && rightPartial.getConstantValue() != null) {
             return new Constant(leftPartial.getConstantValue() + rightPartial.getConstantValue());
         } else {
             return new Add(leftPartial, rightPartial);
