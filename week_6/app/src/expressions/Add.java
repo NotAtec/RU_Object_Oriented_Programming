@@ -14,7 +14,7 @@ public class Add extends TwoArgExpr{
 
     @Override
     public String toString() {
-        return left.toString() + " + " + right.toString();
+        return "(" + left.toString() + "+" + right.toString() + ")";
     }
 
     @Override

@@ -14,7 +14,7 @@ public class Multiply extends TwoArgExpr{
 
     @Override
     public String toString() {
-        return left.toString() + " x " + right.toString();
+        return "(" + left.toString() + "*" + right.toString()+ ")";
     }
 
     @Override

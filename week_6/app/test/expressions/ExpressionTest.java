@@ -26,6 +26,7 @@ public class ExpressionTest {
 	@Test
 	public void testVarToString() {
 		e = var("x");
+		System.out.println(e.toString());
 		assertEquals("x", e.toString());
 	}
 

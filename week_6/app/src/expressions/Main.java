@@ -1,7 +1,10 @@
 package expressions;
+import static expressions.ExpressionFactory.*;
+
 
 public class Main {
 	public static void main(String[] args) {
-		System.out.println("Hello world!");
+		Expression e = var("x");
+		System.out.println(e.toString());
 	}
 }
