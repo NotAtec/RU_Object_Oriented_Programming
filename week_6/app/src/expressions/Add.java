@@ -3,29 +3,26 @@ package expressions;
 import java.util.Map;
 
 public class Add extends TwoArgExpr{
-    
-    Expression left;
-    Expression right;
 
     public Add(Expression left, Expression right) {
-        this.left = left;
-        this.right = right;
+        super.left = left;
+        super.right = right;
     }
 
     @Override
-    public String toString() {
-        return "(" + left.toString() + "+" + right.toString() + ")";
+    public String getOperator() {
+        return "+";
     }
 
     @Override
     public double eval(Map<String, Double> env) {
-        return left.eval(env) + right.eval(env);
+        return super.left.eval(env) + super.right.eval(env);
     }
 
     @Override
 	public Expression partialEval() {
-        Expression leftPartial = left.partialEval();
-        Expression rightPartial = right.partialEval();
+        Expression leftPartial = super.left.partialEval();
+        Expression rightPartial = super.right.partialEval();
         Expression zero = new Constant(0);
 
 

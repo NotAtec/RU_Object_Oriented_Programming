@@ -4,23 +4,20 @@ import java.util.Map;
 
 public class Negate extends OneArgExpr{
 
-    private Expression expr;
-
     public Negate (Expression expr) {
-        this.expr = expr;
+        super.expr = expr;
     }
 
     @Override
     public String toString() {
-        return "-" + expr.toString();
+        return "-" + super.expr.toString();
     }
 
 	public double eval(Map<String, Double> env) {
-        double result = expr.eval(env);
-        return -result;
+        return -super.expr.eval(env);
     }
 	
     public Expression partialEval() {
-        return new Negate(expr);
+        return new Negate(super.expr);
     }
 }
