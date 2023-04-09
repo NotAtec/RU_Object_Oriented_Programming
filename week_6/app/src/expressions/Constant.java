@@ -29,4 +29,13 @@ public class Constant extends NoArgExpr{
 	{
 		return this.constant;
 	}
+
+    @Override
+    public boolean equals (Object cons) {
+        if (cons == null || getClass() != cons.getClass()) {
+            return false;
+        } else {
+            return this.constant == cons.getConstantValue;
+        }
+    }
 }

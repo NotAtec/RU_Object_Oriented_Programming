@@ -8,6 +8,10 @@ public class Variable extends NoArgExpr{
         this.name = name;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
         return this.name;
@@ -21,5 +25,14 @@ public class Variable extends NoArgExpr{
     @Override
 	public Expression partialEval() {
         return new Variable(name);
+    }
+
+    @Override
+    public boolean equals (Object var) {
+        if (var == null || getClass() != var.getClass()) {
+            return false;
+        } else {
+            return this.name.equals(var.getName());
+        }
     }
 }
