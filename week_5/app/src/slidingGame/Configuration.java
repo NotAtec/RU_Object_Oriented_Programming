@@ -35,6 +35,12 @@ public interface Configuration extends Comparable<Configuration> {
 	 * @return a list of successive configurations from the root to 'this'
 	 */
 	public default List<Configuration> pathFromRoot() {
+<<<<<<<<< Temporary merge branch 1
+=========
+
+		throw new UnsupportedOperationException("pathFromRoot: not supported yet.");
+
+>>>>>>>>> Temporary merge branch 2
 		List<Configuration> path = new LinkedList<Configuration>();
 		path.add(this);
 		Configuration step = this;
