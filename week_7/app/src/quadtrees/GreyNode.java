@@ -1,5 +1,6 @@
 package quadtrees;
 
+import java.io.IOException;
 import java.io.Writer;
 
 public class GreyNode implements QuadTreeNode {
@@ -19,7 +20,15 @@ public class GreyNode implements QuadTreeNode {
   }
 
   public void writeNode(Writer out) {
-
+    try {
+      out.append("1");
+      for (QuadTreeNode qtn : children) {
+        qtn.writeNode(out);
+      }
+    } catch (IOException e) {
+      // TODO: handle exception
+    }
+    
   }
 
 }

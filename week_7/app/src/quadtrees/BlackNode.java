@@ -1,6 +1,7 @@
 package quadtrees;
 
 import java.io.Writer;
+import java.io.IOException;
 
 public class BlackNode implements QuadTreeNode {
 
@@ -9,6 +10,10 @@ public class BlackNode implements QuadTreeNode {
   }
 
   public void writeNode(Writer out) {
-
+    try {
+      out.append("00");
+    } catch (IOException e) {
+      // TODO: handle exception
+    }
   }
 }
