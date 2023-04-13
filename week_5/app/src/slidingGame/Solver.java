@@ -1,5 +1,6 @@
 package slidingGame;
 
+import java.util.*;
 import java.util.Queue;
 import java.util.Collection;
 import java.util.HashSet;
@@ -17,6 +18,9 @@ public class Solver {
 	private Collection<Configuration> encountered;
 
 	public Solver(Configuration g) {
+		toExamine = new PriorityQueue<>();
+		toExamine.add(g);
+		encountered = new ArrayList<Configuration>();  
 		toExamine = new PriorityQueue<Configuration>();
 		toExamine.add(g);
 		encountered = new HashSet<Configuration>();  
@@ -31,6 +35,11 @@ public class Solver {
 		while (!toExamine.isEmpty()) {
 			Configuration next = toExamine.remove();
 			if (next.isSolution()) {
+				return next.toString();
+			} else if (!encountered.contains(next)) {
+				encountered.add(next);
+				for (Configuration succ : next.successors()) {
+						toExamine.add(succ);
 				List<Configuration> path = next.pathFromRoot();
 				String solution = makeString(path);
 				return solution;
