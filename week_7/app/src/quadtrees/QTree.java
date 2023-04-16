@@ -70,39 +70,38 @@ public class QTree {
     int newWidth = width / 2;
     int[] xValues = {x, x + width / 2, x + width / 2, x};
     int[] yValues = {y, y, y + width / 2, y + width / 2};
-    int count = 0;
-    QuadTreeNode root = new GreyNode();
-    QuadTreeNode current;
+    GreyNode root = new GreyNode();
     boolean flag = true;
 
     if (bitmap.getBit(x, y)) {
       for (int i = 0; i < width - 1; i++) {
         for (int j = 0; i < width - 1; j++) {
           if (!bitmap.getBit(i, j)) {
-            root = new GreyNode();
+            for (int count = 0; count < 4; count++) {
+              root.setChildX(count, QTree.bitmap2QTree(xValues[count], yValues[count], newWidth, bitmap));
+            }
             flag = false;
           }
         }
       }
       if (flag) {
-        root = new WhiteNode();
+        return new WhiteNode();
       }
-    }
-
-    if (!bitmap.getBit(x, y)) {
+    } else {
       for (int i = 0; i < width - 1; i++) {
         for (int j = 0; i < width - 1; j++) {
           if (bitmap.getBit(i, j)) {
-            root = new GreyNode();
+            for (int count = 0; count < 4; count++) {
+              root.setChildX(count, QTree.bitmap2QTree(xValues[count], yValues[count], newWidth, bitmap));
+            }
             flag = false;
           }
         }
       }
       if (flag) {
-        root = new BlackNode();
+        return new BlackNode();
       }
     }
-
     return root;
   }
 
