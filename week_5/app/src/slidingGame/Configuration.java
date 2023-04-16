@@ -25,7 +25,6 @@ public interface Configuration extends Comparable<Configuration> {
 
 	/**
 	 * For marking final / solution configurations.
-
 	 * @return true if a this is a solution, false otherwise
 	 */
 	public abstract boolean isSolution();
