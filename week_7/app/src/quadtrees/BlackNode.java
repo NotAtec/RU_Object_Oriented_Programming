@@ -5,6 +5,10 @@ import java.io.IOException;
 
 public class BlackNode implements QuadTreeNode {
 
+  public BlackNode() {
+    
+  }
+
   public void fillBitmap(int x, int y, int width, Bitmap bitmap) {
     bitmap.fillArea(x, y, width, false);
   }
