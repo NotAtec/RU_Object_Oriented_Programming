@@ -66,13 +66,44 @@ public class QTree {
     return root;
   }
 
-  public static QuadTreeNode bitmap2QTree(
-    int x,
-    int y,
-    int width,
-    Bitmap bitmap
-  ) {
-    return null;
+  public static QuadTreeNode bitmap2QTree(int x, int y, int width, Bitmap bitmap) {
+    int newWidth = width / 2;
+    int[] xValues = {x, x + width / 2, x + width / 2, x};
+    int[] yValues = {y, y, y + width / 2, y + width / 2};
+    int count = 0;
+    QuadTreeNode root = new GreyNode();
+    QuadTreeNode current;
+    boolean flag = true;
+
+    if (bitmap.getBit(x, y)) {
+      for (int i = 0; i < width - 1; i++) {
+        for (int j = 0; i < width - 1; j++) {
+          if (!bitmap.getBit(i, j)) {
+            root = new GreyNode();
+            flag = false;
+          }
+        }
+      }
+      if (flag) {
+        root = new WhiteNode();
+      }
+    }
+
+    if (!bitmap.getBit(x, y)) {
+      for (int i = 0; i < width - 1; i++) {
+        for (int j = 0; i < width - 1; j++) {
+          if (bitmap.getBit(i, j)) {
+            root = new GreyNode();
+            flag = false;
+          }
+        }
+      }
+      if (flag) {
+        root = new BlackNode();
+      }
+    }
+
+    return root;
   }
 
   private static char readNext(Reader input) {
