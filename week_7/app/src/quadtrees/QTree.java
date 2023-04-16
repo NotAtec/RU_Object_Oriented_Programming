@@ -3,6 +3,7 @@ package quadtrees;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.Stack;
 
 public class QTree {
 
@@ -39,6 +40,8 @@ public class QTree {
 
     GreyNode root = new GreyNode();
     GreyNode current = root;
+    Stack<GreyNode> parents = new Stack<GreyNode>();
+    Stack<Integer> xValues = new Stack<Integer>();
     int x = 0;
 
     c = readNext(input);
@@ -54,9 +57,20 @@ public class QTree {
         }
 
         current.setChildX(x, q);
-        x = (x + 1) % 4;
+        x++;
+        if (x == 4) {
+          if (!parents.isEmpty() & !xValues.isEmpty()) {
+            current = parents.pop();
+            x = xValues.pop();
+          }
+        }
       } else {
-        current = new GreyNode();
+        parents.add(current);
+        xValues.add(x);
+        GreyNode n = new GreyNode();
+        current.setChildX(x, n);
+        current = n;
+
         x = 0;
       }
 
@@ -66,10 +80,15 @@ public class QTree {
     return root;
   }
 
-  public static QuadTreeNode bitmap2QTree(int x, int y, int width, Bitmap bitmap) {
+  public static QuadTreeNode bitmap2QTree(
+    int x,
+    int y,
+    int width,
+    Bitmap bitmap
+  ) {
     int newWidth = width / 2;
-    int[] xValues = {x, x + width / 2, x + width / 2, x};
-    int[] yValues = {y, y, y + width / 2, y + width / 2};
+    int[] xValues = { x, x + width / 2, x + width / 2, x };
+    int[] yValues = { y, y, y + width / 2, y + width / 2 };
     GreyNode root = new GreyNode();
     boolean flag = true;
 
@@ -78,7 +97,15 @@ public class QTree {
         for (int j = 0; i < width - 1; j++) {
           if (!bitmap.getBit(i, j)) {
             for (int count = 0; count < 4; count++) {
-              root.setChildX(count, QTree.bitmap2QTree(xValues[count], yValues[count], newWidth, bitmap));
+              root.setChildX(
+                count,
+                QTree.bitmap2QTree(
+                  xValues[count],
+                  yValues[count],
+                  newWidth,
+                  bitmap
+                )
+              );
             }
             flag = false;
           }
@@ -92,7 +119,15 @@ public class QTree {
         for (int j = 0; i < width - 1; j++) {
           if (bitmap.getBit(i, j)) {
             for (int count = 0; count < 4; count++) {
-              root.setChildX(count, QTree.bitmap2QTree(xValues[count], yValues[count], newWidth, bitmap));
+              root.setChildX(
+                count,
+                QTree.bitmap2QTree(
+                  xValues[count],
+                  yValues[count],
+                  newWidth,
+                  bitmap
+                )
+              );
             }
             flag = false;
           }
