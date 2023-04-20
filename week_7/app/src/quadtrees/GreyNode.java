@@ -4,8 +4,14 @@ import java.io.IOException;
 import java.io.Writer;
 
 public class GreyNode implements QuadTreeNode {
-  private QuadTreeNode[] children;
+  private QuadTreeNode[] children = new QuadTreeNode[4];
 
+  public GreyNode() {
+  }
+
+  public void setChildX(int x, QuadTreeNode q) {
+    children[x] = q;
+  }
 
   public void fillBitmap(int x, int y, int width, Bitmap bitmap) {
     int newWidth = width / 2;
