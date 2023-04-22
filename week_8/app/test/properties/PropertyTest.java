@@ -18,7 +18,7 @@ public class PropertyTest {
 		// Add a property binding here.
 		// propOut should be the same as propIn
 		// BEGIN your code here
-
+		propOut.bind(propIn);
 		// END your code here
 		
 		assertEquals(10, propIn.get());
@@ -37,7 +37,7 @@ public class PropertyTest {
 		// Add a property binding here.
 		// propOut should be propIn + 2
 		// BEGIN your code here
-		
+		propOut.bind(propIn.add(2));
 		// END your code here
 
 		assertEquals(10, propIn.get());
@@ -57,7 +57,7 @@ public class PropertyTest {
 		// Add a property binding here.
 		// propOut should be propIn1 + propIn2
 		// BEGIN your code here
-		
+		propOut.bind(propIn1.add(propIn2));
 		// END your code here
 
 		assertEquals(12, propOut.get());
@@ -79,7 +79,8 @@ public class PropertyTest {
 		// prop1plus2 should be propIn1 + propIn2
 		// propOut should be prop1plus2 + propIn3
 		// BEGIN your code here
-		
+		prop1plus2.bind(propIn1.add(propIn2));
+		propOut.bind(prop1plus2.add(propIn3));
 		// END your code here
 
 		assertEquals(12, prop1plus2.get());
@@ -99,7 +100,7 @@ public class PropertyTest {
 		// Add a property binding here.
 		// propOut should be propIn as string
 		// BEGIN your code here
-		
+		propOut.bind(propIn.asString());
 		// END your code here
 
 		assertEquals("5", propOut.get());
@@ -115,7 +116,7 @@ public class PropertyTest {
 		// Add a property binding here.
 		// propOut should be the a formatted string using propIn
 		// BEGIN your code here
-		
+		propOut.bind(propIn.asString("foo %.2f bar"));
 		// END your code here
 
 		assertEquals("foo 12.00 bar", propOut.get());
