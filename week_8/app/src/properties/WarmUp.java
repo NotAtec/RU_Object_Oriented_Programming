@@ -1,8 +1,6 @@
 package properties;
 
 import javafx.application.Application;
-import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -10,7 +8,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.util.converter.NumberStringConverter;
 
 public class WarmUp extends Application {
 	private GridPane root = new GridPane();
@@ -41,7 +38,7 @@ public class WarmUp extends Application {
 		// bind the text property of the label to the text property of the text
 		// field, so that both show the same text
 		// BEGIN your code here
-
+		label.textProperty().bind(textField.textProperty());
 		// END your code here
 
 		root.add(label, 1, 0);
@@ -60,7 +57,7 @@ public class WarmUp extends Application {
 		// The slider value is a Double, but the label expects a string. You have to
 		// convert it!
 		// BEGIN your code here
-
+		label.textProperty().bind(slider.valueProperty().asString("%2f"));
 		// END your code here
 
 		root.add(label, 1, 1);
@@ -80,7 +77,7 @@ public class WarmUp extends Application {
 		// Set the value property of slider3 to the sum of the values of slider1 and slider2.
 		// When you move one of the sliders, slider3 should move automatically.
 		// BEGIN your code here
-
+		slider3.valueProperty().bind(slider1.valueProperty().add(slider2.valueProperty()));
 		// END your code here
 	}
 
