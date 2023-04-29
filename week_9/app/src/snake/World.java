@@ -31,12 +31,14 @@ public class World {
 
     private final IntegerProperty score = new SimpleIntegerProperty(0);
 
+    private final Timeline timeline = new Timeline();
+    
     public World(int size) {
         this.size = size;
 
         snake = new Snake(size / 2, size / 2, this);
         food = new Food();
-        Timeline timeline = new Timeline();
+        
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(DELAY), e -> {
             snake.move();
@@ -100,5 +102,9 @@ public class World {
 
     public IntegerProperty getScoreProperty() {
         return score;
+    }
+
+    public Timeline getTimeline() {
+        return timeline;
     }
 }
