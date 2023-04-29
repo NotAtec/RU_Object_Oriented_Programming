@@ -20,10 +20,10 @@ public class InputHandler {
             
             switch (keyEvent.getCode().toString()) {
                 case "A":
-                    snake.setDirection(Direction.LEFT);
+                    snake.setDirection(snake.getDirection().rotateLeft());
                     break;
                 case "D":
-                    snake.setDirection(Direction.RIGHT);
+                    snake.setDirection(snake.getDirection().rotateRight());
                     break;
                 case "S":
                     world.setRunning(!world.isRunning());
