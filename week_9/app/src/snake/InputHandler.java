@@ -16,22 +16,20 @@ public class InputHandler {
         Snake snake = world.getSnake();
 
         keyHandler = keyEvent -> {
-            String code = keyEvent.getCharacter();
-
-            switch (code) {
-                case "s":
-                    world.setRunning(!world.isRunning());
-                    break;
-                case "a":
+            // TODO: Implement Controls
+            
+            switch (keyEvent.getCode().toString()) {
+                case "A":
                     snake.setDirection(Direction.LEFT);
                     break;
-                case "d":
+                case "D":
                     snake.setDirection(Direction.RIGHT);
                     break;
-
-                default:
+                case "S":
+                    world.setRunning(!world.isRunning());
                     break;
             }
+            
             keyEvent.consume();
         };
 

@@ -1,5 +1,6 @@
 package snake;
 
+import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -22,7 +23,9 @@ public class SnakeGame extends Pane {
 
         Label scoreText = new Label();
         Label runningText = new Label("Press 's' to start");
-
+        scoreText.textProperty().bind(Bindings.concat(world.getScore() + " points"));
+        runningText.textProperty().bind(Bindings.when(world.getRunningProperty()).then("Press 's' to pause").otherwise("Press 's' to start"));
+        
         // TODO: Implement user interface
 
         ui.getChildren().addAll(scoreText, runningText);
