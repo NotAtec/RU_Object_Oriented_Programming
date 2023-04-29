@@ -34,7 +34,11 @@ public class InputHandler {
         };
 
         mouseHandler = mouseEvent -> {
-            // TODO: Implement mouse
+            
+            System.out.println(mouseEvent.getX() + " " + mouseEvent.getY());
+            if (mouseEvent.getX() <= 400 && mouseEvent.getY() <= 400) {
+                world.getFood().moveTo((int)Math.floor(mouseEvent.getX() / 16), (int) Math.floor(mouseEvent.getY() / 16));
+            }
             mouseEvent.consume();
         };
     }
