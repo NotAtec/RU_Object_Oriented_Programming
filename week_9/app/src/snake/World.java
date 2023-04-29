@@ -36,7 +36,24 @@ public class World {
 
         snake = new Snake(size / 2, size / 2, this);
         food = new Food();
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(DELAY), e -> {
+            snake.move();
+        }));
+
+        running.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    timeline.play();
+                } else {
+                    timeline.pause();
+                }
+            }
+        });
         
+        timeline.play();
         moveFoodRandomly();
     }
 
