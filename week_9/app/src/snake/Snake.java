@@ -23,7 +23,7 @@ public class Snake extends Segment {
     public Snake(int x, int y, World world) {
         super(x, y);
         this.world = world;
-        body.push(this);        
+        body.add(this);
     }
 
     public void createHead() {
@@ -82,8 +82,20 @@ public class Snake extends Segment {
     }
 
     private void nextPos() {
+        int PreviousX = this.getX();
+        int PreviousY = this.getY();
+
         for (Segment segment : body) {
-            segment.setPosition(segment.getX() + direction.getDX(), segment.getY() + direction.getDY());
+            if (segment == this) {
+                segment.setPosition(segment.getX() + direction.getDX(), segment.getY() + direction.getDY());
+                continue;
+            }
+            
+            int tempX = segment.getX();
+            int tempY = segment.getY();
+            segment.setPosition(PreviousX, PreviousY);
+            PreviousX = tempX;
+            PreviousY = tempY;
         }
     }
 }
