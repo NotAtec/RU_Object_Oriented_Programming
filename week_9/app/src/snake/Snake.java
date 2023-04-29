@@ -90,12 +90,16 @@ public class Snake extends Segment {
                 segment.setPosition(segment.getX() + direction.getDX(), segment.getY() + direction.getDY());
                 continue;
             }
-            
+
             int tempX = segment.getX();
             int tempY = segment.getY();
             segment.setPosition(PreviousX, PreviousY);
             PreviousX = tempX;
             PreviousY = tempY;
         }
+    }
+    
+    public int getLength() {
+        return body.size();
     }
 }

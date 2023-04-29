@@ -42,6 +42,7 @@ public class World {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(DELAY), e -> {
             snake.move();
+            score.set(snake.getLength());
         }));
 
         running.addListener(new ChangeListener<Boolean>() {

@@ -32,7 +32,7 @@ public class SnakeGame extends Pane implements SnakeSegmentListener {
 
         Label scoreText = new Label();
         Label runningText = new Label("Press 's' to start");
-        scoreText.textProperty().bind(Bindings.concat(world.getScore() + " points"));
+        scoreText.textProperty().bind(world.getScoreProperty().asString().concat(" points"));
         runningText.textProperty().bind(Bindings.when(world.getRunningProperty()).then("Press 's' to pause").otherwise("Press 's' to start"));
 
         ui.getChildren().addAll(scoreText, runningText);
