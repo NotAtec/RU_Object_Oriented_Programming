@@ -23,7 +23,13 @@ public class Snake extends Segment {
     public Snake(int x, int y, World world) {
         super(x, y);
         this.world = world;
-        body.push(this);
+        body.push(this);        
+    }
+
+    public void createHead() {
+        for (SnakeSegmentListener l : listeners) {
+            l.onNewSegment(this);
+        }
     }
 
     public void move() {
@@ -40,7 +46,9 @@ public class Snake extends Segment {
             int[] xy = { body.getLast().getX(), body.getLast().getY() };
 
             this.nextPos();
-            body.push(new Segment(xy[0], xy[1]));
+            Segment newSeg = new Segment(xy[0], xy[1]);
+            body.push(newSeg);
+            listeners.forEach(l -> l.onNewSegment(newSeg));
             return;
         }
 
