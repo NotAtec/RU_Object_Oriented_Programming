@@ -52,8 +52,7 @@ public class World {
                 }
             }
         });
-        
-        timeline.play();
+
         moveFoodRandomly();
     }
 
