@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 
 /**
  * A JavaFX Pane that displays the snake game represented by the given world
@@ -15,7 +16,11 @@ public class SnakeGame extends Pane {
     public SnakeGame(World world) {
         setPrefSize(world.getSize() * SCALE, world.getSize() * SCALE);
 
-        // TODO: Implement graphics
+        Circle foodGfx = new Circle(SCALE / 2);
+        foodGfx.centerXProperty().bind(world.getFood().getXProperty().multiply(SCALE).add(SCALE/ 2));
+        foodGfx.centerYProperty().bind(world.getFood().getYProperty().multiply(SCALE).add(SCALE / 2));
+
+        getChildren().add(foodGfx);
     }
 
     public static Pane createUserInterface(World world) {
