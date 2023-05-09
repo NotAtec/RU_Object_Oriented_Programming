@@ -1,19 +1,19 @@
 package pair;
 
-public class Pair {
-	private final Object first;
-	private final Object second;
+public class Pair<F, S> {
+	private final F first;
+	private final S second;
 
-	public Pair(Object first, Object second) {
+	public Pair(F first, S second) {
 		this.first = first;
 		this.second = second;
 	}
 
-	public Object getFirst() {
+	public F getFirst() {
 		return first;
 	}
 
-	public Object getSecond() {
+	public S getSecond() {
 		return second;
 	}
 }

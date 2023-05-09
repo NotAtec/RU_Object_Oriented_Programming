@@ -8,7 +8,7 @@ public class PairTest {
 
 	@Test
 	public void firstInOut() {
-		Pair p = new Pair("foo", true);
+		Pair <String, Boolean> p = new Pair<>("foo", true);
 		assertEquals("foo", (String) p.getFirst());
 		assertEquals(true, (Boolean) p.getSecond());
 	}
@@ -16,8 +16,8 @@ public class PairTest {
 	@Test
 	public void fails()
 	{
-		Pair p = new Pair("foo", true);
-		// This should be a compile error, not a run time error
+		Pair <String, Boolean> p = new Pair<>("foo", true);
+		// This should be a compile error, not a run time error classCastExeption
 		assertEquals(true, (Boolean) p.getFirst());
 		assertEquals("foo", (String) p.getSecond());
 	}
