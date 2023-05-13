@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class EvaluateVisitor implements FormulaVisitor<Boolean, Void>{
 
-    private Map<String, Boolean> environ;
+    private final Map<String, Boolean> environ;
 
     public EvaluateVisitor(Map<String, Boolean> environ) {
         this.environ = environ;
@@ -29,7 +29,7 @@ public class EvaluateVisitor implements FormulaVisitor<Boolean, Void>{
             case OrOp: return left || right;
             case ImpliesOp: return !left || right;
         }
-        return true; //compiler doesn't think we return something
+        return true; //compiler doesn't think we returned something
     }
 
     @Override

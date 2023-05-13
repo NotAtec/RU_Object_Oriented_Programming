@@ -2,7 +2,7 @@ package ast;
 
 public class Atom implements Formula{
 
-    private String prop;
+    private final String prop;
     private final int precedence = 1;
 
     Atom (String prop) {

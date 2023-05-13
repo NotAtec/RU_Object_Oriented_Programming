@@ -2,7 +2,7 @@ package ast;
 
 public class Not implements Formula{
 
-    private Formula operand ;
+    private final Formula operand ;
     private final int precedence = 4;
     
     public Not( Formula oper ) {
