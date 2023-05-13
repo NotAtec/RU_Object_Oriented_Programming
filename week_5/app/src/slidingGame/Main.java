@@ -1,11 +1,14 @@
 package slidingGame;
 
+<<<<<<<<< Temporary merge branch 1
+=========
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+>>>>>>>>> Temporary merge branch 2
 public class Main {
 	public static void main(String[] args) {
 		int[] oneStep = { 1, 2, 3, 4, 5, 6, 7, 9, 8 };
@@ -27,7 +30,10 @@ public class Main {
 			, 21, 22, 23, 24,  6
 			};
 
+<<<<<<<<< Temporary merge branch 1
+=========
 		SlidingGame s = new SlidingGame(tenSteps);
+>>>>>>>>> Temporary merge branch 2
 		SlidingGame s = new SlidingGame(oneStep);
 		Solver solver = new Solver(s);
 

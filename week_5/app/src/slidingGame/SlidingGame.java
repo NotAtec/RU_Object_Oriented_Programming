@@ -2,8 +2,11 @@ package slidingGame;
 
 import java.util.ArrayList;
 import java.util.Collection;
+<<<<<<<<< Temporary merge branch 1
+=========
 import java.util.LinkedList;
 import java.util.List;
+>>>>>>>>> Temporary merge branch 2
 
 /**
  * A template of a sliding game
@@ -231,7 +234,10 @@ public class SlidingGame implements Configuration {
 
 		int [][] board1 = new int [N][N];
 		board1 = fillBord(board1, board);
+<<<<<<<<< Temporary merge branch 1
+=========
 		parent = new SlidingGame(board1, manhattanDist, holeX, holeY);
+>>>>>>>>> Temporary merge branch 2
 
 		//calculate manhattendistance without the two pieces to be swapped.
 		//this is needed for updating the manhattendistance after swapping
