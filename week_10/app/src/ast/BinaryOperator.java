@@ -27,4 +27,8 @@ public class BinaryOperator implements Formula{
     public BinOp getBinOp() {
         return operator;
     }
+
+    public int getPrecedence() {
+        return operator.precedence;
+    }
 }

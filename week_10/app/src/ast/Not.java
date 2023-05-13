@@ -3,6 +3,7 @@ package ast;
 public class Not implements Formula{
 
     private Formula operand ;
+    private final int precedence = 4;
     
     public Not( Formula oper ) {
         this. operand = oper;
@@ -17,5 +18,7 @@ public class Not implements Formula{
         return visitor.visit(this, a);       
     }
 
-    
+    public int getPrecedence() {
+        return precedence;
+    }
 }

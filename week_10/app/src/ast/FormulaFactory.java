@@ -29,7 +29,9 @@ public class FormulaFactory {
 	public static final Formula FALSE = Constant.FALSE;
 
 	public static String prettyPrint(Formula f) {
-		return "";
+		PrintVisitor printVisitor = new PrintVisitor(new StringBuilder());
+		f.accept(printVisitor, 0);
+		return printVisitor.getResult();
 	}
 
 	public static Boolean evaluate(Formula f, Map<String,Boolean> env) {
