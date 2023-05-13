@@ -2,10 +2,19 @@ package ast;
 
 public class Not implements Formula{
 
+    private Formula operand ;
+    
+    public Not( Formula oper ) {
+        this. operand = oper;
+    }
+
+    public Formula getOperand () {
+        return operand ;
+    }
+
     @Override
     public <R, A> R accept(FormulaVisitor<R, A> visitor, A a) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'accept'");
+        return visitor.visit(this, a);       
     }
 
     
