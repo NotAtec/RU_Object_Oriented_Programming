@@ -15,6 +15,7 @@ public class StreamsTest {
     public void countEvenNumbers() {
         // Use streams and lambdas to count the number of even digits in PI
         long result = 0;
+        result = Stream.of(PI).filter(x -> x % 2 == 0).count();
         assertEquals(20, result);
     }
 
