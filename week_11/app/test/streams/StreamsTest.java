@@ -25,6 +25,7 @@ public class StreamsTest {
     public void sumOddNumbers() {
         // Use streams and lambdas to sum the odd digits of PI
         int result = 0;
+        result = Stream.of(PI).filter(x -> x % 2 == 1).reduce(0, Integer::sum);
         assertEquals(157, result);
     }
     
