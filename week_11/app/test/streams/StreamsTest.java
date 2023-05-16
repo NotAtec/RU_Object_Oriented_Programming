@@ -181,6 +181,8 @@ public class StreamsTest {
         //         with Collectors.toMap, Map.Entry::getKey, Map.Entry::getValue
         Map<String,String> result = philosophers;
 
+        result = philosophers.entrySet().stream().filter(e -> "Greek".equals(e.getValue()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         assertEquals(expected, result);
     }
 }
