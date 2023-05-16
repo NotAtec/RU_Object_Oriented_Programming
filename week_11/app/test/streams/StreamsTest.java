@@ -35,6 +35,7 @@ public class StreamsTest {
     public void multiplyNumbers() {
         // Use streams and lambdas to multiply the 5 biggest digits of PI
         int result = 0;
+        result = Stream.of(PI).sorted(Comparator.reverseOrder()).limit(5).reduce(1, (a, b) -> a * b);
         assertEquals(59049, result);
     }
    
