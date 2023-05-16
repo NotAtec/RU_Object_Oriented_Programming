@@ -133,7 +133,8 @@ public class StreamsTest {
         // Hint 2: To construct a string from a list of characters, use
         //         Stream::collect with StringBuilder::new and StringBuilder::append
         // Hint 3: Use a type cast to turn an integer x into a character: (char)x
-        return s;
+        String result = s.chars().map(c -> rot13(c)).collect(StringBuilder::new, (sb, c) -> sb.append((char) c), StringBuilder::append).toString();
+        return result;
     }
 
     @Test
