@@ -48,6 +48,7 @@ public class StreamsTest {
         Double tax = 0.12; // 12% tax
         Double[] prices = {11.5, 10.0, 1234.5678, 17.3, 19.99};
         Double result = 0.0;
+        result = Stream.of(prices).reduce(0.0, (a, b) -> a + b + (b * tax));
         assertEquals(1448.560736, (double)result, 0.0000001);
     }
 
