@@ -101,6 +101,7 @@ public class StreamsTest {
         //   - To turn an IntStream into a Stream<Integer> you can use Stream.mapToObj
         // Hint 3: Use Stream.collect and Collectors.toList() to turn a stream into a List
         List<Integer> result = input;
+        result = IntStream.range(0, input.size() - 1).filter(x -> x % 2 == 0).mapToObj(idx -> input.get(idx)).collect(Collectors.toList());
 
         assertEquals(expected, result);
     }
