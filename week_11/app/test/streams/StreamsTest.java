@@ -60,6 +60,7 @@ public class StreamsTest {
         // Hint: use Integer::parseInt
         String[] input = {"1", "5", "13", "7", "2"};
         int result = 0;
+        result = Stream.of(input).map(Integer::valueOf).reduce(Integer::sum).get();
         assertEquals(28, result);
     }
     
