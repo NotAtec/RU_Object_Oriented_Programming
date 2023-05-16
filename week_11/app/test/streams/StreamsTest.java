@@ -1,6 +1,7 @@
 package streams;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.*;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -77,7 +78,8 @@ public class StreamsTest {
         
         // Hint: Stream.of(input) is a stream of int arrays
         int result = 0;
-        
+        result = Stream.of(input).flatMapToInt(x -> Arrays.stream(x)).sum();
+
         assertEquals(57, result);
     }
 
