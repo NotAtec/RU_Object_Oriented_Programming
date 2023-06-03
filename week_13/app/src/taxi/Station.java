@@ -21,9 +21,15 @@ public class Station {
 	public void enterStation(int nrOfPassengers) {
 		lock.lock();
 		try {
+			while (nrOfPassengersAtStation > 0) {
+				nowaitingpass.await();
+			}
 			nrOfPassengersAtStation += nrOfPassengers;
 			totalNrOfPassengers += nrOfPassengers;
 			System.out.println(nrOfPassengers + " passengers arrived at station");
+			waitingpass.signalAll();
+		} catch (InterruptedException e){
+			e.printStackTrace();
 		} finally {
 			lock.unlock();
 		}
@@ -35,12 +41,17 @@ public class Station {
 	 *
 	 * @param requestedNrOfPassengers
 	 * @return number of passengers actually leaving
+	 * @throws InterruptedException
 	 */
-	public int leaveStation(int requestedNrOfPassengers) {
+	public int leaveStation(int requestedNrOfPassengers) throws InterruptedException {
 		lock.lock();
 		try {
+			while (nrOfPassengersAtStation == 0) {
+				waitingpass.await();
+			}
 			int actuallyLeaving = Math.min(requestedNrOfPassengers, nrOfPassengersAtStation);
 			nrOfPassengersAtStation -= actuallyLeaving;
+			nowaitingpass.signalAll();
 			return actuallyLeaving;
 		} finally {
 			lock.unlock();

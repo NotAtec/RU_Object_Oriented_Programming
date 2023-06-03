@@ -24,13 +24,18 @@ public class Taxi implements Runnable {
 	 * passengers the taxi just waits a little
 	 */
 	public void takePassengers() {
-		int nrOfPassengers = station.leaveStation(maxNrOfPassengers);
-		if (nrOfPassengers > 0) {
-			totalNrOfPassengers += nrOfPassengers;
-			nrOfRides++;
-			System.out.println("Taxi " + taxiId + " takes " + nrOfPassengers + " passengers");
-		} else {
-			System.out.println("There are no passengers for taxi " + taxiId);
+		int nrOfPassengers;
+		try {
+			nrOfPassengers = station.leaveStation(maxNrOfPassengers);
+			if (nrOfPassengers > 0) {
+				totalNrOfPassengers += nrOfPassengers;
+				nrOfRides++;
+				System.out.println("Taxi " + taxiId + " takes " + nrOfPassengers + " passengers");
+			} else {
+				System.out.println("There are no passengers for taxi " + taxiId);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
