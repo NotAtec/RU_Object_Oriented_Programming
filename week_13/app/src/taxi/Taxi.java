@@ -1,6 +1,6 @@
 package taxi;
 
-public class Taxi {
+public class Taxi implements Runnable {
 
 	private final int taxiId;
 	private final int maxNrOfPassengers;
@@ -46,5 +46,17 @@ public class Taxi {
 
 	public int getTotalNrOfPassengers() {
 		return totalNrOfPassengers;
+	}
+
+	@Override
+	public void run() {
+		while (!station.isClosed() || station.waitingPassengers() > 0 ) {
+			try {
+				takePassengers();
+				Thread.sleep(100*transportationTime);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

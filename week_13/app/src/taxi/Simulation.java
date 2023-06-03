@@ -1,5 +1,10 @@
 package taxi;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
 public class Simulation {
 
 	/**
@@ -45,7 +50,7 @@ public class Simulation {
 	/**
 	 * simulation step: if there are passengers load them in a taxi, otherwise let a
 	 * train bring new passengers, or indicate that simulation stops
-	 */
+	 
 	private void step() {
 		if (station.waitingPassengers() > 0) {
 			taxis[nextTaxi].takePassengers();
@@ -58,16 +63,34 @@ public class Simulation {
 			hasEnded = true;
 		}
 	}
+	*/
 
 	public void start() {
-		while (!ended()) {
-			step();
+		ExecutorService exec;
+		exec = Executors.newCachedThreadPool();
+		exec.submit(train);
+		for (int i = 0; i < NR_OF_TAXIS; i++) {
+			exec.submit(taxis[i]);
+		}
+		shutdownAndAwaitTermination(exec);
+	}
+
+	private void shutdownAndAwaitTermination(ExecutorService exec) {
+		exec.shutdown();
+		try {
+			if (!exec.awaitTermination(10, TimeUnit.SECONDS)) {
+				exec.shutdownNow();		
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
+	/*/
 	private boolean ended() {
 		return hasEnded;
 	}
+	*/
 
 	public void showStatistics() {
 		System.out.println("All persons have been transported");
